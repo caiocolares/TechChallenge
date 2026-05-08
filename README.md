@@ -40,7 +40,7 @@ A aplicação foi desenvolvida seguindo os princípios de **Clean Architecture**
 
 1.  **Clonar o repositório:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/caiocolares/TechChallenge.git
     cd TechChallenge
     ```
 
