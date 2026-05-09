@@ -21,6 +21,7 @@ services:
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: sso.devel.unifor.br
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://db:5432/techchallenge
       KC_DB_USERNAME: user
