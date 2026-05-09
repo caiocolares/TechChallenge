@@ -1,10 +1,10 @@
 package br.com.fiap.techchallenge.presentation.controller;
 
 import br.com.fiap.techchallenge.domain.entity.*;
-import br.com.fiap.techchallenge.presentation.dto.AdicionarPecaRequest;
-import br.com.fiap.techchallenge.presentation.dto.AdicionarServicoRequest;
-import br.com.fiap.techchallenge.presentation.dto.CriarOrdemServicoRequest;
-import br.com.fiap.techchallenge.presentation.dto.OrdemServicoResponse;
+import br.com.fiap.techchallenge.presentation.dto.request.AdicionarPecaRequest;
+import br.com.fiap.techchallenge.presentation.dto.request.AdicionarServicoRequest;
+import br.com.fiap.techchallenge.presentation.dto.request.CriarOrdemServicoRequest;
+import br.com.fiap.techchallenge.presentation.dto.response.OrdemServicoResponse;
 import br.com.fiap.techchallenge.application.service.OrdemServicoService;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.http.HttpStatus;

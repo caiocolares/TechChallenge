@@ -1,5 +1,6 @@
 package br.com.fiap.techchallenge.infrastructure.conf;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +14,7 @@ import java.util.stream.Stream;
 public class KeycloakJwtRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     @Override
-    public Collection<GrantedAuthority> convert(Jwt jwt) {
+    public Collection<GrantedAuthority> convert(@NonNull Jwt jwt) {
         return Stream.concat(
                 extractRealmRoles(jwt).stream(),
                 extractClientRoles(jwt).stream()
@@ -24,7 +25,7 @@ public class KeycloakJwtRoleConverter implements Converter<Jwt, Collection<Grant
                 .toList();
     }
 
-    @SuppressWarnings("unchecked")
+
     private List<String> extractRealmRoles(Jwt jwt) {
         Map<String, Object> realmAccess = jwt.getClaimAsMap("realm_access");
         if (realmAccess == null) return List.of();
@@ -35,7 +36,7 @@ public class KeycloakJwtRoleConverter implements Converter<Jwt, Collection<Grant
         return List.of();
     }
 
-    @SuppressWarnings("unchecked")
+
     private List<String> extractClientRoles(Jwt jwt) {
         String clientId = jwt.getClaimAsString("azp");
         if (clientId == null) return List.of();

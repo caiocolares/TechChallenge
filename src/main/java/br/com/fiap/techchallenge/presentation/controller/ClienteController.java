@@ -1,10 +1,10 @@
 package br.com.fiap.techchallenge.presentation.controller;
 
-import br.com.fiap.techchallenge.domain.entity.ClienteEntity;
 import br.com.fiap.techchallenge.domain.entity.CpfCnpj;
-import br.com.fiap.techchallenge.presentation.dto.CadastrarClienteRequest;
-import br.com.fiap.techchallenge.presentation.dto.ClienteResponse;
+import br.com.fiap.techchallenge.presentation.dto.request.CadastrarClienteRequest;
+import br.com.fiap.techchallenge.presentation.dto.response.ClienteResponse;
 import br.com.fiap.techchallenge.application.service.ClienteService;
+import br.com.fiap.techchallenge.presentation.mapper.ClienteMapper;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,39 +18,40 @@ import java.util.UUID;
 public class ClienteController {
 
     private final ClienteService clienteService;
+    private final ClienteMapper clienteMapper;
 
-    public ClienteController(ClienteService clienteService) {
+    public ClienteController(ClienteService clienteService, ClienteMapper clienteMapper) {
         this.clienteService = clienteService;
+        this.clienteMapper = clienteMapper;
     }
 
     @PostMapping
     @RolesAllowed("ATENDENTE")
     public ResponseEntity<ClienteResponse> cadastrar(@RequestBody CadastrarClienteRequest request) {
-        ClienteEntity cliente = clienteService.cadastrar(
-                new CpfCnpj(request.cpfCnpj()),
-                request.nome(),
-                request.email(),
-                request.telefone()
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                clienteMapper.toResponse(clienteService.cadastrar(
+                        new CpfCnpj(request.cpfCnpj()),
+                        request.nome(),
+                        request.email(),
+                        request.telefone()
+                ))
         );
-        return ResponseEntity.status(HttpStatus.CREATED).body(ClienteResponse.de(cliente));
     }
 
     @GetMapping("/{id}")
     @RolesAllowed({"ATENDENTE", "CLIENTE"})
     public ResponseEntity<ClienteResponse> buscarPorId(@PathVariable UUID id) {
-        return ResponseEntity.ok(ClienteResponse.de(clienteService.buscarPorId(id)));
+        return ResponseEntity.ok(clienteMapper.toResponse(clienteService.buscarPorId(id)));
     }
 
     @GetMapping
     public ResponseEntity<List<ClienteResponse>> buscaTodos() {
-        return ResponseEntity.ok(clienteService.buscarTodos().stream()
-                .map(ClienteResponse::de)
-                .toList());
+        return ResponseEntity.ok(clienteMapper.toResponseList(clienteService.buscarTodos()));
     }
 
     @GetMapping("/cpf-cnpj/{cpfCnpj}")
     @RolesAllowed("ATENDENTE")
     public ResponseEntity<ClienteResponse> buscarPorCpfCnpj(@PathVariable String cpfCnpj) {
-        return ResponseEntity.ok(ClienteResponse.de(clienteService.buscarPorCpfCnpj(new CpfCnpj(cpfCnpj))));
+        return ResponseEntity.ok(clienteMapper.toResponse(clienteService.buscarPorCpfCnpj(new CpfCnpj(cpfCnpj))));
     }
 }

@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.presentation.dto;
+package br.com.fiap.techchallenge.presentation.dto.request;
 
 public record CriarOrdemServicoRequest(
         String cpfCnpj,

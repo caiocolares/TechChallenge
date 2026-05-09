@@ -1,9 +1,9 @@
 package br.com.fiap.techchallenge.presentation.controller;
 
 import br.com.fiap.techchallenge.domain.entity.PecaOficinaEntity;
-import br.com.fiap.techchallenge.presentation.dto.AtualizarEstoqueRequest;
-import br.com.fiap.techchallenge.presentation.dto.CadastrarPecaOficinaRequest;
-import br.com.fiap.techchallenge.presentation.dto.PecaOficinaResponse;
+import br.com.fiap.techchallenge.presentation.dto.request.AtualizarEstoqueRequest;
+import br.com.fiap.techchallenge.presentation.dto.request.CadastrarPecaOficinaRequest;
+import br.com.fiap.techchallenge.presentation.dto.response.PecaOficinaResponse;
 import br.com.fiap.techchallenge.application.service.PecaOficinaService;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.http.HttpStatus;

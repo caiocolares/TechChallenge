@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.presentation.dto;
+package br.com.fiap.techchallenge.presentation.dto.request;
 
 import java.math.BigDecimal;
 
